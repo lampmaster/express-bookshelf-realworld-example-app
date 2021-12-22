@@ -19,4 +19,5 @@ jobs:
          run: nvm install $NODE_VERSION
        - name: Install dependencies
          run: npm install
-       - name: npm run lint
+       - name: Lint with ESlint
+         run: npm run lint
