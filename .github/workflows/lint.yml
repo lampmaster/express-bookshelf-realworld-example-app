@@ -1,0 +1,26 @@
+name: eslint
+
+on:
+  push:
+    branch: [main]
+  pull_request:
+    branch: [main]
+
+jobs:
+  eslint:
+     runs-on: node:14.17.0-alpine
+     steps:
+       - uses: actions/checkout@v2
+       - name: Install dependencies
+         run: npm install
+       - name: Lint with ESlint
+         run: npm run lint
+
+  prettier:
+    runs-on: node:14.17.0-alpine
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Lint with ESlint
+        run: npm run check:format
