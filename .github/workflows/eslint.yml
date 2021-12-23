@@ -8,18 +8,19 @@ on:
 
 jobs:
   eslint:
-     runs-on: ubuntu-latest
-     steps:
-       - uses: actions/checkout@v2
-       - name: Install NVM
-         run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-       - name: Activate NVM
-         run: export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use
-       - name: Install Node.js
-         env:
-           NODE_VERSION: 16.13.1
-         run: nvm install $NODE_VERSION
-       - name: Install dependencies
-         run: npm install
-       - name: Lint with ESlint
-         run: npm run lint
+    runs-on: node:14.17.0-alpine
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Lint with ESlint
+        run: npm run lint
+
+  prettier:
+    runs-on: node:14.17.0-alpine
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Lint with ESlint
+        run: npm run check:format
