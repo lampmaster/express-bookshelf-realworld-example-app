@@ -9,11 +9,14 @@ cache:
   paths:
     - .npm/
 
-before_script:
-  - npm ci --cashe .npm --prefer-offline
+.default-cache: &default-cache
+  before_script:
+    - npm ci --cache .npm --prefer-offline
 
 
 eslint:
+  extends:
+    - .default-cache
   image: node:16.13.1-alpine
   stage: lint
   variables:
@@ -37,4 +40,4 @@ deploy:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - scp .
+    - scp . deploy@3.8.204.225:~/realworld
